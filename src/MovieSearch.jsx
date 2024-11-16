@@ -15,20 +15,22 @@ const MovieSearch = () => {
 
   const apiData = useCallback(async () => {
     if (!debouncedSearchInput) return;
-
-    setLoading(true); // Set loading state
-    const response = await fetch(
-        `http://www.omdbapi.com/?apikey=${apiKey}&s=${debouncedSearchInput}`
-    );  
+  
+    setLoading(true);
+  
+    
+    const response = await fetch(`/api/searchMovies?s=${debouncedSearchInput}`);
     const data = await response.json();
-
-    if (data.Response === "True") {
-      setMovies(data.Search);
+  
+    if (data) {
+      setMovies(data);  
     } else {
       setMovies([]);
     }
+  
     setLoading(false);
   }, [debouncedSearchInput]);
+  
 
   const handleSearchInput = (value) => {
     setSearchInput(value);
@@ -91,8 +93,14 @@ const MovieSearch = () => {
           !loading && <div>No movies found</div>
         )}
       </div>
-      <Modal className="flex flex-col justify-center items-center" open={modalOpen} onClose={() => {setModalOpen(false)}}>
-        <MovieDetailModal movie={movieDetails}/>
+      <Modal
+        className="flex flex-col justify-center items-center"
+        open={modalOpen}
+        onClose={() => {
+          setModalOpen(false);
+        }}
+      >
+        <MovieDetailModal movie={movieDetails} />
       </Modal>
     </div>
   );
