@@ -2,7 +2,6 @@ import { Input, Modal } from "@mui/material";
 import React, { useEffect, useState, useRef, useCallback } from "react";
 import MovieDetailModal from "./MovieDetailModal";
 
-const apiKey = process.env.REACT_APP_MOVIE_API_KEY;
 
 const MovieSearch = () => {
   const [searchInput, setSearchInput] = useState("");
