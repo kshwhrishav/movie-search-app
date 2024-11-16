@@ -2,6 +2,8 @@ import { Input, Modal } from "@mui/material";
 import React, { useEffect, useState, useRef, useCallback } from "react";
 import MovieDetailModal from "./MovieDetailModal";
 
+const apiKey = process.env.REACT_APP_MOVIE_API_KEY;
+
 const MovieSearch = () => {
   const [searchInput, setSearchInput] = useState("");
   const [movies, setMovies] = useState([]);
@@ -16,8 +18,8 @@ const MovieSearch = () => {
 
     setLoading(true); // Set loading state
     const response = await fetch(
-      `http://www.omdbapi.com/?apikey=5e43d3bf&s=${debouncedSearchInput}`
-    );
+        `http://www.omdbapi.com/?apikey=${apiKey}&s=${debouncedSearchInput}`
+    );  
     const data = await response.json();
 
     if (data.Response === "True") {
