@@ -16,11 +16,10 @@ const MovieSearch = () => {
     if (!debouncedSearchInput) return;
   
     setLoading(true);
-  
     
     const response = await fetch(`/api/searchMovies?s=${debouncedSearchInput}`);
     const data = await response.json();
-  
+    console.log(data);
     if (data) {
       setMovies(data);  
     } else {
